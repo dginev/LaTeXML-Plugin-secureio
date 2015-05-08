@@ -1,0 +1,27 @@
+# -*- mode: Perl -*-
+# /=====================================================================\ #
+# |  secureio.sty.ltxml                                                 | #
+# | Style file for securing IO                                          | #
+# |                                                                     | #
+# | PURPOSE: Temporary workaround for secure IO, until a "best" solution| #
+# |          enters brucemiller/LaTeXML master                          | #
+# |=====================================================================| #
+# | NOT Part of LaTeXML:                                                | #
+# |  Public domain software, produced as part of work done by the       | #
+# |  United States Government & not subject to copyright in the US.     | #
+# |---------------------------------------------------------------------| #
+# | Deyan Ginev <d.ginev@jacobs-university.de>                  #_#     | #
+# |                                                            (o o)    | #
+# \=========================================================ooo==U==ooo=/ #
+package LaTeXML::Package::Pool;
+use strict;
+use warnings;
+use LaTeXML::Package;
+no warnings 'redefine';
+
+# Load this binding last to disable all Input-facing macros
+foreach my $macro(qw(input @@input @iinput include InputIfFileExists openin verbatiminput)) {
+  DefMacroI("\\$macro", undef, '\relax', locked => 1);
+}
+
+1;
